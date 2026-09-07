@@ -1,0 +1,3 @@
+import {env} from 'cloudflare:workers';
+import {requestError} from '@/app/security';
+export async function GET(_req:Request,{params}:{params:Promise<{id:string}>}){try{const {id}=await params;if(!/^[a-f0-9-]{36}\.(png|jpg|webp)$/.test(id))return new Response('Not found',{status:404});const obj=await env.BUCKET.get('logos/'+id);if(!obj)return new Response('Not found',{status:404});return new Response(obj.body,{headers:{'Content-Type':obj.httpMetadata?.contentType||'application/octet-stream','Cache-Control':'private, no-store','X-Content-Type-Options':'nosniff','Content-Security-Policy':"default-src 'none'; sandbox",'Cross-Origin-Resource-Policy':'same-origin'}})}catch(e){return requestError(e)}}

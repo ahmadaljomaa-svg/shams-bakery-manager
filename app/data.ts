@@ -1,0 +1,8 @@
+export type Order={id:string;customer:string;product:string;qty:number;price:number;route:string;status:string;date:string;paid:number};
+export type Stock={name:string;qty:number;unit:string;min:number};
+export type State={orders:Order[];stock:Stock[];customers:{name:string;phone:string;address:string}[];log:{text:string;time:string}[]};
+export const products=[{name:'خبز عربي أبيض',price:1.2},{name:'خبز عربي أسمر',price:1.4},{name:'خبز تنور',price:1.8},{name:'مناقيش زعتر',price:2.5},{name:'مناقيش جبنة',price:3.2},{name:'صمون بالسمسم',price:.8}];
+export const routes=['الجولة 1 · وسط هامبورغ','الجولة 2 · ألتونا','الجولة 3 · هاربورغ','الجولة 4 · شمال هامبورغ'];
+export const stages=['جديد','قيد الإنتاج','جاهز للتوزيع','في الطريق','تم التسليم'];
+const customers=[{name:'Sancak Bäckerei',phone:'',address:'Hamburg'},{name:'Al Sham Markt',phone:'',address:'Altona'},{name:'مطعم الياسمين',phone:'',address:'Hamburg Mitte'},{name:'Ersa Markt',phone:'',address:'Harburg'},{name:'Orient Lebensmittel',phone:'',address:'Hamburg Nord'},{name:'مخبز البركة',phone:'',address:'Hamburg'}];
+export const initial:State={customers,orders:customers.map((c,i)=>({id:`SH-2026-${1048-i}`,customer:c.name,product:products[i].name,qty:[240,180,120,160,80,300][i],price:products[i].price,route:routes[i%4],status:stages[[1,2,0,3,4,2][i]],date:'2026-09-06',paid:i===4?256:0})),stock:[{name:'طحين قمح أبيض',qty:850,unit:'كغ',min:200},{name:'طحين قمح كامل',qty:180,unit:'كغ',min:100},{name:'سمسم',qty:18,unit:'كغ',min:25},{name:'خميرة',qty:12,unit:'كغ',min:20},{name:'زيت زيتون',qty:75,unit:'لتر',min:30},{name:'أكياس تغليف',qty:4200,unit:'قطعة',min:1000}],log:[]};
